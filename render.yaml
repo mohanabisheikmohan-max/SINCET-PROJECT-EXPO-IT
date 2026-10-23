@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: innovate-fest-2k26
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .

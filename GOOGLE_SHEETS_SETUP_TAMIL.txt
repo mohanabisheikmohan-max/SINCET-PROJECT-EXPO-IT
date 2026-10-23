@@ -1,0 +1,77 @@
+INNOVATE FEST 2K26 — GOOGLE SHEETS CONNECT செய்வது (STEP BY STEP)
+===============================================================
+
+முக்கியம்:
+- Website form data-வை உங்கள் Google Sheet-ல் save செய்ய இந்த setup அவசியம்.
+- Google Sheet-ஐ Private-ஆக வைத்திருக்கவும். Website visitor-களுக்கு Sheet-ஐ share செய்ய வேண்டாம்.
+- Form-ல் payment QR காட்டப்படும். இந்த setup payment-ஐ verify செய்யாது; UPI transaction/reference ID-ஐ மட்டும் சேமிக்கும்.
+
+STEP 1 — Google Sheet உருவாக்கவும்
+1. https://sheets.google.com திறக்கவும்.
+2. Blank spreadsheet உருவாக்கவும்.
+3. பெயரை: INNOVATE FEST 2K26 Registrations என்று வைக்கவும்.
+4. Sheet-ஐ உங்கள் admin Google account-ல் மட்டும் வைத்திருங்கள்.
+
+STEP 2 — Apps Script திறக்கவும்
+1. அந்த Sheet-ல் Extensions > Apps Script கிளிக் செய்யவும்.
+2. Code.gs-ல் இருக்கும் sample code-ஐ முழுவதும் delete செய்யவும்.
+3. இந்த ZIP-ல் உள்ள google-apps-script/Code.gs file-ஐ திறந்து அதன் code-ஐ copy செய்து Apps Script editor-ல் paste செய்யவும்.
+4. Save (Ctrl+S) செய்யவும். Project name-ஐ INNOVATE FEST Registration என்று வைக்கலாம்.
+
+STEP 3 — Web App deploy செய்யவும்
+1. Apps Script-ல் Deploy > New deployment தேர்வு செய்யவும்.
+2. Select type (gear icon) > Web app தேர்வு செய்யவும்.
+3. Description: Registration form receiver.
+4. Execute as: Me தேர்வு செய்யவும்.
+5. Who has access: Anyone தேர்வு செய்யவும். (Static website-ல் இருந்து submit செய்ய இது தேவைப்படலாம்.)
+6. Deploy கிளிக் செய்யவும்.
+7. Google permission கேட்டால் Review permissions > உங்கள் account > Allow கொடுக்கவும்.
+8. காட்டப்படும் Web app URL-ஐ copy செய்யவும். URL பொதுவாக https://script.google.com/macros/s/.../exec என்று இருக்கும்.
+   URL-ஐ யாரிடமும் தேவையின்றி பகிர வேண்டாம்; இது public form endpoint.
+
+STEP 4 — Website-ல் URL சேர்க்கவும்
+1. ZIP-ஐ extract செய்யவும்.
+2. VS Code-ல் script.js file திறக்கவும்.
+3. இந்த வரியைத் தேடவும்:
+   const GOOGLE_SHEETS_WEB_APP_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+4. Placeholder-ஐ உங்கள் உண்மையான Web app URL-ஆல் மாற்றவும். உதாரண வடிவம்:
+   const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/உங்கள்_DEPLOYMENT_ID/exec";
+   (மேலே உள்ள example-ஐ அப்படியே பயன்படுத்த வேண்டாம்; உங்கள் URL-ஐ paste செய்யவும்.)
+5. Save செய்யவும்.
+
+STEP 5 — Test செய்யவும்
+1. Website-ஐ Live Server மூலம் திறக்கவும்.
+2. Register / Scan QR அல்லது Explore Registration கிளிக் செய்யவும்.
+3. Team Leader, Member 1, Member 2, Topic, Phone, Email, UPI reference ஆகியவற்றை நிரப்பவும்.
+4. Submit Registration கிளிக் செய்யவும்.
+5. Google Sheet-க்கு திரும்பி Registrations tab-ல் புதிய row வந்துள்ளதா பார்க்கவும்.
+6. Row வரவில்லை என்றால் Apps Script > Deploy > Manage deployments-ல் Web app URL சரியா பார்க்கவும். Code-ஐ மாற்றினால் Deploy > Manage deployments > Edit > New version > Deploy செய்யவும்.
+
+STEP 6 — Website publish செய்யும்போது
+- script.js-ல் சரியான Web app URL இருப்பதை உறுதிசெய்து, முழு website folder-ஐ hosting service-ல் upload செய்யவும்.
+- Website URL-ஐ மட்டும் மற்றவர்களுடன் பகிரவும்; Google Sheet-ஐ public share செய்ய வேண்டாம்.
+
+எந்த தகவல்கள் Sheet-ல் வரும்?
+Timestamp, Event, Team Leader, Member 1, Member 2, Project/Topic, Phone, Email, UPI Transaction ID/Payment Reference.
+
+LIMITATION / பாதுகாப்பு:
+- இந்த static website integration payment-ஐ தானாக verify செய்யாது; transaction ID-ஐ மட்டும் சேமிக்கும். Admin உங்கள் UPI app-ல் சரிபார்க்க வேண்டும்.
+- Payment screenshot/file upload இந்த version-ல் சேர்க்கப்படவில்லை.
+- Apps Script endpoint-ஐ Anyone access-ல் deploy செய்தால் URL தெரிந்தவர்கள் request அனுப்ப வாய்ப்பு உண்டு. Sheet-ஐ private-ஆக வைத்துக் கொள்ளவும், entries-ஐ சரிபார்க்கவும். பெரிய அளவிலான/உணர்வான data-க்கு authentication உள்ள backend பயன்படுத்துவது சிறந்தது.
+
+
+============================================================
+புதிய வசதி: REGISTER பட்டன் + GOOGLE SHEET QR
+============================================================
+1. உங்கள் ORIGINAL Google Sheet-ஐ திறக்கவும்.
+2. Share -> General access -> Anyone with the link -> Viewer என்பதைத் தேர்வு செய்து Copy link செய்யவும்.
+   எச்சரிக்கை: Public Viewer என்றால் Sheet உள்ள விவரங்களை link உள்ளவர்கள் பார்க்க முடியும்.
+3. இந்த ZIP-ல் உள்ள sheet-config.js கோப்பை Notepad / VS Code-ல் திறக்கவும்.
+4. sheet-config.js-ல் உங்கள் link http://qrto.org/I7oYRn ஏற்கனவே சேர்க்கப்பட்டுள்ளது. அது சரியான Google Sheet link-ஆக திறக்கிறதா சோதிக்கவும்.
+   உதாரணம்: const GOOGLE_SHEET_PUBLIC_URL = "https://docs.google.com/spreadsheets/d/....../edit?usp=sharing";
+5. Save செய்யவும்.
+6. index.html-ஐ திறக்கவும். மேலே உள்ள Register / Open Sheet பட்டன், மற்றும் SCAN TO OPEN GOOGLE SHEET QR இரண்டும் அதே Sheet-ஐத் திறக்கும்.
+7. QR image உருவாக இணைய இணைப்பு தேவை. QR image உருவாக்குவதற்கு QRServer external service பயன்படுத்தப்படுகிறது.
+8. assets/registration-qr.png என்பது PAYMENT QR; அதை மாற்ற வேண்டாம். புதிய Google Sheet QR தனியாகக் காட்டப்படும்.
+
+குறிப்பு: Google Sheet QR நேரடியாக Sheet-ஐ திறக்கும்; இது registration form அல்ல. மாணவர்கள் தகவல் submit செய்ய வேண்டுமெனில் website form அல்லது Google Form பயன்படுத்த வேண்டும்.

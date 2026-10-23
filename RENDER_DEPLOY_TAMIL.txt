@@ -1,0 +1,40 @@
+INNOVATE FEST 2K26 - Render Deployment (Tamil)
+
+இந்த website static HTML/CSS/JavaScript site. Render-ல் Static Site ஆக deploy செய்யலாம்.
+
+முக்கியம்:
+- Google Sheet link தற்போது sheet-config.js-ல் உள்ளது: http://qrto.org/I7oYRn
+- அந்த link சரியான Google Sheet-ஐ திறக்கிறதா browser-ல் முதலில் test செய்யவும்.
+- Google Sheet-ஐ public viewer ஆக மாற்றினால் Sheet உள்ள தகவல்களை link உள்ளவர்கள் பார்க்கலாம். மாணவர்களின் தனிப்பட்ட தகவல்கள் இருந்தால் public access கொடுக்க வேண்டாம்.
+
+STEP 1 — ZIP Extract
+1. இந்த ZIP-ஐ Extract செய்யவும்.
+2. innovate_render_ready folder உள்ள files-ஐ பயன்படுத்தவும்.
+
+STEP 2 — GitHub-ல் upload
+1. https://github.com திறந்து sign in செய்யவும்.
+2. New repository உருவாக்கவும்; உதாரணம்: innovate-fest-2k26
+3. இந்த folder-ல் உள்ள எல்லா files/folders-ஐ repository-யின் root-க்கு upload செய்யவும்.
+   குறிப்பாக index.html, style.css, script.js, sheet-config.js, assets/, render.yaml.
+
+STEP 3 — Render deploy
+1. https://render.com திறந்து sign in செய்யவும்.
+2. Dashboard → New + → Static Site தேர்வு செய்யவும்.
+3. உங்கள் GitHub account connect செய்து innovate-fest-2k26 repository-ஐ தேர்வு செய்யவும்.
+4. Settings:
+   Name: innovate-fest-2k26
+   Branch: main (உங்கள் repository branch வேறு என்றால் அதைப் பயன்படுத்தவும்)
+   Root Directory: காலியாக விடவும்
+   Build Command: காலியாக விடவும்
+   Publish Directory: .
+5. Create Static Site அழுத்தவும்.
+6. Deploy முடிந்ததும் Render தரும் https://....onrender.com link-ஐ திறந்து சோதிக்கவும்.
+
+STEP 4 — QR / Sheet link test
+1. Website-ல் Register / Open Sheet link-ஐத் திறக்கவும்.
+2. QR code-ஐ mobile phone-ல் scan செய்து link சரியா என்று சோதிக்கவும்.
+3. Link-ஐ மாற்ற வேண்டுமானால் sheet-config.js-ல் GOOGLE_SHEET_PUBLIC_URL value-ஐ மாற்றி GitHub-க்கு commit/push செய்யவும்; Render தானாக redeploy செய்யும்.
+
+NOTE
+- Render deployment என்பது website-ஐ host செய்கிறது; இது Google Sheet-க்கு registration data submit செய்யும் backend அல்ல.
+- நேரடியாக Google Sheet திறக்கும் QR என்பது Sheet பார்க்கும் link மட்டுமே. மாணவர்கள் form submit செய்து data சேர்க்க வேண்டுமெனில் Google Form அல்லது website form + Google Apps Script இணைப்பு தேவை.
